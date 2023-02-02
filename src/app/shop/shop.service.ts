@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { IBrand } from '../shared/models/brand';
 import { IPagination } from '../shared/models/pagination';
+import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
 
@@ -17,11 +18,11 @@ export class ShopService {
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
 
-    if (shopParams.brandId !== 0) {
+    if (shopParams.brandId !== '') {
       params = params.append('brandId', shopParams.brandId.toString());
     }
 
-    if (shopParams.typeId !== 0) {
+    if (shopParams.typeId !== '') {
       params = params.append('typeId', shopParams.typeId.toString())
     }
 
@@ -37,6 +38,10 @@ export class ShopService {
       .pipe(
         map(response => response.body)
       );
+  }
+
+  getProduct(id: string) {
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {

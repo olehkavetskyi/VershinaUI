@@ -47,7 +47,7 @@ export class ShopComponent {
   getBrands() {
     this.shopService.getBrands().subscribe({
       next: (response) => {
-        this.brands = [{id: 0, name: 'All'}, ...response]
+        this.brands = [{id: '', name: 'All'}, ...response]
       },
       error: (e) => console.log(e)
     })
@@ -56,19 +56,19 @@ export class ShopComponent {
   getTypes() {
     this.shopService.getTypes().subscribe({
       next: (response) => {
-        this.types = [{id: 0, name: 'All'}, ...response]
+        this.types = [{id: '', name: 'All'}, ...response]
       },
       error: (e) => console.log(e)
     })
   }
 
-  onBrandSelected(brandId: number) {
+  onBrandSelected(brandId: string) {
     this.shopParams.brandId = brandId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
-  onTypeSelected(typeId: number) {
+  onTypeSelected(typeId: string) {
     this.shopParams.typeId = typeId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
