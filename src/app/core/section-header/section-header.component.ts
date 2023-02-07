@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { BreadcrumbService } from 'xng-breadcrumb';
-import { Breadcrumb } from 'xng-breadcrumb/lib/types/breadcrumb';
-
 @Component({
   selector: 'app-section-header',
   templateUrl: './section-header.component.html',

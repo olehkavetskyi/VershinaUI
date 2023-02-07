@@ -12,9 +12,9 @@ import { ShopService } from './shop.service';
 })
 export class ShopComponent {
   @ViewChild('search') searchTerm: ElementRef;
-  products: IProduct[];
-  brands: IBrand[];
-  types: IType[];
+  products: IProduct[] = [];
+  brands: IBrand[] = [];
+  types: IType[] = [];
   shopParams = new ShopParams();
   totalCount: number;
   sortOptions = [
