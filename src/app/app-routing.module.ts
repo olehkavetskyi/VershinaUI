@@ -18,8 +18,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule)
   },
+  {
+    path: 'orders',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./orders/order.module').then(mod => mod.OrderModule)
+  },
   {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule)},
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  {path: '**', redirectTo: '', pathMatch: 'full'},
+  
 ];
 
 @NgModule({
