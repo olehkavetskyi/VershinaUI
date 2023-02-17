@@ -32,7 +32,6 @@ export class OrderDetailedComponent implements OnInit {
   getOrder(id: string) {
     this.ordersService.getOrder(id).subscribe({
       next: responce => {
-        console.log(responce)
         this.order = responce;
       }
     })
