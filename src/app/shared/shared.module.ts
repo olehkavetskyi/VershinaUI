@@ -26,7 +26,6 @@ import { RouterLink, RouterModule } from '@angular/router';
     CommonModule,
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
-    FormsModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     CdkStepperModule,
