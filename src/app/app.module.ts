@@ -11,12 +11,14 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdersComponent,
-    OrderDetailedComponent
+    OrderDetailedComponent,
+    AdminPanelComponent
   ],
   imports: [
     HttpClientModule,

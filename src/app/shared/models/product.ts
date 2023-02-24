@@ -1,5 +1,5 @@
 export interface IProduct {
-    id: string;
+    id?: string;
     name: string;
     description: string;
     price: number;
@@ -9,13 +9,7 @@ export interface IProduct {
 }
 
 export class Product implements Product {
-  // id: string;
-  // name: string;
-  // price: number;
-  // pictureUrl: string;
-  // productType: string;
-  // productBrand: string;
-  id: string;
+  id?: string;
   name: string;
   description: string;
   price: number;
