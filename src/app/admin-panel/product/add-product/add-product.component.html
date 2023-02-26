@@ -23,8 +23,10 @@
               (change)="onFileSelected($event)"
               >
         </div>
-        <button class="btn btn-lg btn-primary mt-3" type="submit" [disabled]="!productForm.valid">
-            Create
-        </button> 
+        <div class="d-grid">
+            <button class="btn btn-lg btn-primary mt-3" type="submit" [disabled]="!productForm.valid">
+                Create
+            </button> 
+        </div>
       </form>
 </div>
