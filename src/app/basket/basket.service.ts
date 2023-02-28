@@ -83,9 +83,8 @@ export class BasketService {
           this.deleteBasket(basket);
       }
     }
-      
-
   }
+  
   deleteBasket(basket: Basket) {
     return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe({
       next: () => {
@@ -143,6 +142,4 @@ export class BasketService {
   private isProduct(item: Product | BasketItem): item is Product {
     return (item as Product).productBrand !== undefined;
   }
-
-
 }
