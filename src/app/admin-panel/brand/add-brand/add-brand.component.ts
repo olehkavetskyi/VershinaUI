@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminPanelService } from '../../admin-panel.service';
+import { ProductsService } from '../../product/products.service';
+import { BrandsService } from '../brands.service';
 
 @Component({
   selector: 'app-add-brand',
@@ -11,17 +13,17 @@ import { AdminPanelService } from '../../admin-panel.service';
 })
 export class AddBrandComponent {
 
-  constructor(private adminService: AdminPanelService, private router: Router, private toastr: ToastrService) {}
+  constructor(private brandsService: BrandsService, private router: Router, private toastr: ToastrService) {}
 
-  addBrandForm = new FormGroup({
+  brandForm = new FormGroup({
     name: new FormControl('', [Validators.required])
   })
 
   onSubmit() {
-    this.adminService.addBrand(this.addBrandForm.value.name).subscribe({
+    this.brandsService.addBrand(this.brandForm.value.name).subscribe({
       next: () => {
         this.toastr.success("Brand created successfully")
-        this.router.navigateByUrl('/admin')
+        this.router.navigateByUrl('/admin/brands')
       },
       error: (err) => this.toastr.error(err.message)
     })

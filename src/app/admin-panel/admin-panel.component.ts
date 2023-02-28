@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent {
-
+  
 }

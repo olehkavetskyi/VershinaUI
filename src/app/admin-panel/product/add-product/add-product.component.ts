@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/shared/models/brand';
 import { Type } from 'src/app/shared/models/productType';
 import { ShopService } from 'src/app/shop/shop.service';
-import { AdminPanelService } from '../../admin-panel.service';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-add-product',
@@ -16,24 +16,15 @@ export class AddProductComponent implements OnInit {
    brands: Brand[] = [];
    types: Type[] = [];
 
-    productForm: FormGroup;
     selectedFile: File;
   
     constructor(private fb: FormBuilder, private http: HttpClient,
-       private shopService: ShopService, private adminService: AdminPanelService,
+       private shopService: ShopService, private productsService: ProductsService,
        private toastr: ToastrService) {
 
     }
 
     ngOnInit(): void {
-      this.productForm = this.fb.group({
-        name: ['', Validators.required],
-        description: ['', Validators.required],
-        price: ['', Validators.required],
-        type: ['', Validators.required],
-        brand: ['', Validators.required]
-      });
-
       this.shopService.getBrands().subscribe({
         next: (result) => {
       this.brands = result
@@ -45,7 +36,14 @@ export class AddProductComponent implements OnInit {
         }
       });
     }
-  
+    productForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      type: ['', Validators.required],
+      brand: ['', Validators.required]
+    });
+
     onFileSelected(event: any) {
       this.selectedFile = event.target.files[0];
     }
@@ -60,7 +58,7 @@ export class AddProductComponent implements OnInit {
       formData.append('productBrandId', this.productForm.get('brand').value);
 
 
-      this.adminService.AddProduct(formData).subscribe({
+      this.productsService.addProduct(formData).subscribe({
         next: () => this.toastr.success('Product added successfully'),
         error: error => this.toastr.error(error.message)
       })

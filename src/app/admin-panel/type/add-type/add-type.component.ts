@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminPanelService } from 'src/app/admin-panel/admin-panel.service';
+import { TypesService } from '../types.service';
 
 @Component({
   selector: 'app-add-type',
@@ -10,17 +11,17 @@ import { AdminPanelService } from 'src/app/admin-panel/admin-panel.service';
   styleUrls: ['./add-type.component.scss']
 })
 export class AddTypeComponent {
-  constructor(private adminService: AdminPanelService, private router: Router, private toastr: ToastrService) {}
+  constructor(private typesService: TypesService, private router: Router, private toastr: ToastrService) {}
 
-  addTypeForm = new FormGroup({
+  typeForm = new FormGroup({
     name: new FormControl('', [Validators.required])
   })
 
   onSubmit() {
-    this.adminService.AddType(this.addTypeForm.value.name).subscribe({
+    this.typesService.addType(this.typeForm.value.name).subscribe({
       next: () => {
         this.toastr.success("Type created successfully")
-        this.router.navigateByUrl('/admin')
+        this.router.navigateByUrl('/admin/types')
       },
       error: (err) => this.toastr.error(err.message)
     })
