@@ -20,7 +20,9 @@ export class BrandsComponent implements OnInit {
     {name: 'Price: Low to High', value: 'priceAsc'},
     {name: 'Price: High to Low', value: 'priceDesc'}
   ]
-  constructor(private shopService: ShopService, private brandsService: BrandsService, private router: Router) { }
+  constructor(private shopService: ShopService, private brandsService: BrandsService, private router: Router) {
+    
+   }
 
   ngOnInit(): void {
     this.getBrands();
@@ -42,6 +44,7 @@ export class BrandsComponent implements OnInit {
   getBrands() {
     this.shopService.getBrands().subscribe({
       next: response => this.brands = response
+      
     })
   }
   // getBrands() {

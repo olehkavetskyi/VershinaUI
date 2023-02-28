@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit {
 
   editProduct(value: Product) {
     const navigationExtras: NavigationExtras = {state: value};
-    this.router.navigate(['admin/types/edit-type'], navigationExtras);
+    this.router.navigate(['admin/products/edit-product'], navigationExtras);
   }
 
   onPageChanged(event: any) {

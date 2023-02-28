@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { IPagination } from 'src/app/shared/models/pagination';
+import { Product } from 'src/app/shared/models/product';
 import { ShopParams } from 'src/app/shared/models/shopParams';
 import { environment } from 'src/environments/environment';
 
@@ -12,12 +13,16 @@ export class ProductsService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  AddProduct(values: any) {
+  addProduct(values: any) {
     return this.http.post<any>(this.baseUrl + 'products/add-product', values);
   }
 
   deleteProduct(id: string) {
     return this.http.delete(this.baseUrl + 'products/delete-product/' + id);
+  }
+
+  editProduct(type: any) {
+    return this.http.put<Product>(this.baseUrl + 'products/edit-product', type);
   }
 
   getProducts(shopParams: ShopParams) {

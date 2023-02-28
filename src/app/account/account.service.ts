@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { map, of, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Address, User } from '../shared/models/user';
@@ -47,6 +48,12 @@ export class AccountService {
     )
   }
 
+  getRoles() {
+    const token = this.getToken();
+    const decodedToken: any = jwtDecode(token);
+    return decodedToken.role;
+  }
+
   register(values: any) {
     return this.http.post<User>(this.baseUrl + 'account/register', values).pipe(
       map(user => {
@@ -54,6 +61,10 @@ export class AccountService {
         this.currentUserSource.next(user);
       })
     )
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
   }
 
   logout() {

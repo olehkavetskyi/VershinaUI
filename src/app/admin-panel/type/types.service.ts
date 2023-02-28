@@ -17,7 +17,7 @@ export class TypesService {
   addType(name: string) {
     this.newType.name = name;
 
-    return this.http.post<string>(this.baseUrl + 'products/add-type', this.newType)
+    return this.http.post<string>(this.baseUrl + 'types/add-type', this.newType)
   }
 
   deleteType(type: any) {
@@ -30,14 +30,14 @@ export class TypesService {
         name: type.name
       }
     };
-    return this.http.delete(this.baseUrl + 'products/delete-type', httpOptions);
+    return this.http.delete(this.baseUrl + 'types/delete-type', httpOptions);
   }
 
   getType(id: string) {
-    return this.http.get<Type>(this.baseUrl + 'products/type' + id);
+    return this.http.get<Type>(this.baseUrl + 'types/' + id);
   }
 
-  editType(type: Type) {
-    return this.http.put<Type>(this.baseUrl + 'products/edit-type', type);
+  editType(type: any) {
+    return this.http.put<Type>(this.baseUrl + 'types/edit-type', type);
   }
 }

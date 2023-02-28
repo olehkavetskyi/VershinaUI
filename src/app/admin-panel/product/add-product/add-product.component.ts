@@ -16,7 +16,6 @@ export class AddProductComponent implements OnInit {
    brands: Brand[] = [];
    types: Type[] = [];
 
-    productForm: FormGroup;
     selectedFile: File;
   
     constructor(private fb: FormBuilder, private http: HttpClient,
@@ -26,14 +25,6 @@ export class AddProductComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.productForm = this.fb.group({
-        name: ['', Validators.required],
-        description: ['', Validators.required],
-        price: ['', Validators.required],
-        type: ['', Validators.required],
-        brand: ['', Validators.required]
-      });
-
       this.shopService.getBrands().subscribe({
         next: (result) => {
       this.brands = result
@@ -45,7 +36,14 @@ export class AddProductComponent implements OnInit {
         }
       });
     }
-  
+    productForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      type: ['', Validators.required],
+      brand: ['', Validators.required]
+    });
+
     onFileSelected(event: any) {
       this.selectedFile = event.target.files[0];
     }
@@ -60,7 +58,7 @@ export class AddProductComponent implements OnInit {
       formData.append('productBrandId', this.productForm.get('brand').value);
 
 
-      this.productsService.AddProduct(formData).subscribe({
+      this.productsService.addProduct(formData).subscribe({
         next: () => this.toastr.success('Product added successfully'),
         error: error => this.toastr.error(error.message)
       })

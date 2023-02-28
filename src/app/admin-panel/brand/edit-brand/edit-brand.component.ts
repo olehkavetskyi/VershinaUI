@@ -13,11 +13,8 @@ import { BrandsService } from '../brands.service';
 export class EditBrandComponent {
   brand?: Brand;
 
-  constructor(private brandsService: BrandsService, private router: Router, private toastr: ToastrService) { }
-
-  ngOnInit(): void {
+  constructor(private brandsService: BrandsService, private router: Router, private toastr: ToastrService) { 
     this.brand = this.router.getCurrentNavigation().extras?.state as Brand; 
-    //this.brand = navigation; 
     this.brandForm.controls['name'].setValue(this.brand?.name);
   }
 
@@ -26,7 +23,11 @@ export class EditBrandComponent {
   })
 
   onSubmit() {
-    this.brandsService.addBrand(this.brandForm.value.name).subscribe({
+    const formData = new FormData();
+    formData.append('id', this.brand?.id);
+    formData.append('name', this.brandForm.value.name);
+    
+    this.brandsService.editBrand(formData).subscribe({
       next: () => {
         this.toastr.success("Type edited successfully")
         this.router.navigateByUrl('/admin/brands')

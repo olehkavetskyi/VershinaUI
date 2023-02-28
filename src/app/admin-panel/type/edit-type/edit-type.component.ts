@@ -10,23 +10,25 @@ import { TypesService } from '../types.service';
   templateUrl: './edit-type.component.html',
   styleUrls: ['./edit-type.component.scss']
 })
-export class EditTypeComponent implements OnInit {
+export class EditTypeComponent {
   type?: Type;
 
-  constructor(private typesService: TypesService, private router: Router, private toastr: ToastrService) { }
-
-  ngOnInit(): void {
-    const navigation = this.router.getCurrentNavigation().extras?.state as Type; 
-    this.type = navigation; 
-    this.typeForm.controls['name'].setValue(this.type?.name);
+  constructor(private typesService: TypesService, private router: Router, private toastr: ToastrService) { 
+    this.type = this.router.getCurrentNavigation().extras.state as Type;
+    this.typeForm.controls['name'].setValue(this.type.name);
   }
+
 
   typeForm = new FormGroup({
     name: new FormControl('', [Validators.required])
   })
 
   onSubmit() {
-    this.typesService.addType(this.typeForm.value.name).subscribe({
+    const formData = new FormData();
+    formData.append('id', this.type?.id);
+    formData.append('name', this.typeForm.value.name);
+    
+    this.typesService.editType(formData).subscribe({
       next: () => {
         this.toastr.success("Type edited successfully")
         this.router.navigateByUrl('/admin/types')
